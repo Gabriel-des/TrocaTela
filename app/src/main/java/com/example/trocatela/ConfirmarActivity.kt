@@ -1,8 +1,11 @@
 package com.example.trocatela
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -34,6 +37,14 @@ class ConfirmarActivity : AppCompatActivity() {
     }
 
     fun btEnviarSms(view: View) {
+        val phone_destination = "+554699112233"
+        val sms_body = "Cod: ${tvCod.text} Qtd: ${tvQtd.text} Valor: ${tvValor.text}"
 
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("smsto:$phone_destination")
+            putExtra("sms_body", sms_body)
+        }
+
+        startActivity(intent)
     }
 }
